@@ -1,5 +1,3 @@
-# Poker
-#
 # Pour vous mettre dans le contexte fictif, la société Hsh et plus particulièrement le service Direction des systèmes d'Informations souhaite réalisé une maintenance corrective de certains jeux qui se révèle défecteux et présente des réalisations qui n'ont pas de formalités. Nous étions chargés d'améliorer le poker.
 # 
 # Dans ce README, nous expliquerons dans sa globalité le programme final.
