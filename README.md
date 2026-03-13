@@ -239,3 +239,22 @@ Il fait appel à des fonctions vu précedement : ```tirage()``` et ```carteUniqu
             }
         }
 ```
+### Tirage du jeu
+
+La fonction ```private static void tirageDuJeu()``` permet d'avoir la création de 5 cartes qui constituera la main où toutes les cartes seront uniques.
+
+```c#
+ private static void tirageDuJeu(ref carte[] unJeu)
+        {
+            for (int i = 0; i < 5; i++) 
+            {
+                do
+                {
+                    unJeu[i] = tirage();
+                }
+                while (!carteUnique(unJeu[i], unJeu, i)); 
+            }
+        }
+```
+
+### Affichage Carte
