@@ -402,3 +402,80 @@ Console.Write("RESULTAT - Vous avez : ");
 
 #### Enregistrer le score
 
+Cette partie du code permet d'enregistrer le dernier jeu qui a été créer, en ayant le nom du joueur puis qu'il soit inclut dans un ficher .txt.
+
+```c#
+Console.Write("Enregistrer le Jeu ? (O/N) : ");
+enregister = char.Parse(Console.ReadLine());
+enregister = Char.ToUpper(enregister);
+
+if (enregister == 'O')
+  {
+      const string fileName = "scores.txt";
+      Console.WriteLine("Vous pouvez saisir votre nom (ou pseudo) : ");
+      nom = Console.ReadLine();
+                        
+      using (f = new BinaryWriter(new FileStream("scores.txt", FileMode.Create, FileAccess.Write)))
+      {
+          f.Write(nom);
+          for (int a = 0; a < 5; a++) 
+          {
+              f.Write(MonJeu[a].valeur);
+              f.Write(MonJeu[a].famille);
+          }
+      }
+      Console.WriteLine("Score enregistre!");
+      Console.ReadKey();
+  }
+```
+
+#### Afficher le résultat
+
+Cette dernière partie du code permet d'éxécuter les derniers résultats enregistrés. On lit d'abord le fichier .txt crée lors de l'enregistrement puis crée un jeu à partir de ces données.
+
+```c#
+if(reponse == "2")
+  {
+  string articles;
+  char[] délimiteurs = { ';' };
+  carte UneCarte;
+  string nom;
+  char c;
+  Array c1;
+
+  if (File.Exists("scores.txt"))
+  {
+    using (BinaryReader f = new BinaryReader(new FileStream("scores.txt", FileMode.Open, FileAccess.Read)))
+    {
+        nom = f.ReadString();
+        for (int s = 0; s < 5; s++)
+        {
+            MonJeu[s].valeur = f.ReadChar();
+
+            c = f.ReadChar();
+
+            if (char.ToString(c) == "")
+            {
+                MonJeu[s].famille = '\u2665';
+            }
+            if (char.ToString(c) == "")
+            {
+                MonJeu[s].famille = '\u2666';
+            }
+            if (char.ToString(c) == "")
+            {
+                MonJeu[s].famille = '\u2663';
+            }
+            if (char.ToString(c) == "")
+            {
+                MonJeu[s].famille = '\u2660';
+            }
+
+            c1 = f.ReadChars(3);
+        }
+      }
+      Console.WriteLine("Nom : " + nom);
+      affichageCarte(ref MonJeu[0]);
+      Console.ReadKey();
+}
+```
