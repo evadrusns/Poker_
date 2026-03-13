@@ -258,3 +258,5 @@ La fonction ```private static void tirageDuJeu()``` permet d'avoir la création 
 ```
 
 ### Affichage Carte
+
+La fonction ```private static void affichageCarte()``` permet l'affichage des cartes, cette fonction vient assurer la couleur et les caractères spécifiques de chaque carte.
