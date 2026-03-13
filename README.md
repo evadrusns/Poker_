@@ -111,7 +111,7 @@ if (similaire[b] == 2)
   {
     combi = combinaison.PAIRE;
     doublepaire = doublepaire + 1;
-    var = true;
+    full = true;
   }
 ```
 
@@ -154,7 +154,36 @@ if (similaire[b] == 4)
 La partie de la quinte est séparé en deux parties. La première vérifie que toutes les valeurs sont uniques et stocke le résultat dans notre tableau ```similaire()```. Ensuite, la deuxième partie permet de comparer le jeu aux valeurs stockés dans le tableau ```char[,] quintes``` initialisé au départ de notre cherche combinaison. Si tout ses paramètres sont respectés alors, cela forme une quinte.
 
 ```c#
+for (int c = 0; c < 5; c++) 
+                {
+                    if (similaire[c] == 1)
+                    { 
+                        z = z + 1;
+                    }
+                    if (z == 5)
+                    {
+                        for (int v = 0; v < 4; v++) 
+                        {
+                            memoire = 0;
+                            for (int k = 0; k < 5; k++)
+                            {
+                                for (j = 0; j < 5; j++)
+                                {
+                                    if (unJeu[k].valeur == quintes[v, j])
+                                    {
+                                        memoire = memoire + 1;
+                                    }
 
+                                    if (memoire == 5)
+                                    {
+                                        combi = combinaison.QUINTE;
+                                        qui = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 ```
 
 #### Full
@@ -162,7 +191,10 @@ La partie de la quinte est séparé en deux parties. La première vérifie que t
 La partie du full est un assemblage de nos booléens initialisés lors de la paire et du brelan, si les deux booléens retournent true alors nous avons un full.
 
 ```c#
-
+ if (full == true && bre == true)
+  {
+    combi = combinaison.FULL;
+  }
 ```
 
 #### Quinte Flush
@@ -185,4 +217,25 @@ La partie de la quinte flush permet de regarder si toutes nos cartes font partie
   {
     combi = combinaison.COULEUR;
   }
+```
+
+### Echange Carte
+
+La fonction ```private static void echangeCarte()``` permet de savoir les choix de l'utilisateur concernant l'échange des cartes.
+Elle est permise par le tableau ```int[] e``` qui contient les changements voulus par l'utilisateur.
+Il fait appel à des fonctions vu précedement : ```tirage()``` et ```carteUnique()```, pour permettre au jeu d'être inclu avec ses modifications.
+
+```c#
+ private static void echangeCarte(ref carte[] unJeu, ref int[] e)
+        {
+            for (int i = 0; i < e.Length; i++)
+            {
+                int a = e[i];   
+                do
+                {
+                    unJeu[a] = tirage();        
+                } 
+                while (!carteUnique(unJeu[e[i]], unJeu, a));  
+            }
+        }
 ```
