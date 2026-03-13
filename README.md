@@ -259,4 +259,144 @@ La fonction ```private static void tirageDuJeu()``` permet d'avoir la création 
 
 ### Affichage Carte
 
-La fonction ```private static void affichageCarte()``` permet l'affichage des cartes, cette fonction vient assurer la couleur et les caractères spécifiques de chaque carte.
+La fonction ```private static void affichageCarte()``` permet l'affichage des cartes, cette fonction vient assurer la couleur et les caractères spécifiques ( ♠, ♣, ♥, ♦ de chaque carte.
+
+```c#
+private static void affichageCarte(ref carte uneCarte)
+        {    
+            int left = 0;
+            int c = 1;
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (MonJeu[i].famille == '\u2665' || MonJeu[i].famille == '\u2666')
+                    SetConsoleTextAttribute(hConsole, 252);
+                else
+                    SetConsoleTextAttribute(hConsole, 240);
+                Console.SetCursorPosition(left, 5);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '*', '-', '-', '-', '-', '-', '-', '-', '-', '-', '*');
+                Console.SetCursorPosition(left, 6);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, '|');
+                Console.SetCursorPosition(left, 7);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|');
+                Console.SetCursorPosition(left, 8);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', (char)MonJeu[i].famille, ' ', ' ', ' ', ' ', ' ', ' ', ' ', (char)MonJeu[i].famille, '|');
+                Console.SetCursorPosition(left, 9);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', ' ', ' ', (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, ' ', ' ', ' ', '|');
+                Console.SetCursorPosition(left, 10);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', (char)MonJeu[i].famille, ' ', ' ', (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, ' ', ' ', (char)MonJeu[i].famille, '|');
+                Console.SetCursorPosition(left, 11);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', ' ', ' ', (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, ' ', ' ', ' ', '|');
+                Console.SetCursorPosition(left, 12);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', (char)MonJeu[i].famille, ' ', ' ', ' ', ' ', ' ', ' ', ' ', (char)MonJeu[i].famille, '|');
+                Console.SetCursorPosition(left, 13);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|');
+                Console.SetCursorPosition(left, 14);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, '|');
+                Console.SetCursorPosition(left, 15);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '*', '-', '-', '-', '-', '-', '-', '-', '-', '-', '*');
+                Console.SetCursorPosition(left, 16);
+                SetConsoleTextAttribute(hConsole, 10);
+                Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", ' ', ' ', ' ', ' ', ' ', c, ' ', ' ', ' ', ' ', ' ');
+                left = left + 15;
+                c++;
+            }
+
+        }
+```
+### Constitution de la main
+
+#### Choix du jeu
+
+La fonction ```static void Main()``` est la fonction principale du jeu. 
+Dans un premier temps, elle crée la prèmiere page du jeu où l'on aura différents choix : 1. Jeu, 2. Score, 3. Fin. 
+Puis demande le choix de l'utilisateur.
+
+```c#
+string reponse;
+    Console.OutputEncoding = Encoding.GetEncoding(65001);
+    SetConsoleTextAttribute(hConsole, 012);
+       while (true)
+         {
+                Console.Clear();
+                Console.WriteLine("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '*', '-', '-', '-', '-', '-', '-', '-', '-', '-', '*');
+                Console.WriteLine("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', ' ', 'P', 'O', 'K', 'E', 'R', ' ', ' ', '|');
+                Console.WriteLine("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|');
+                Console.WriteLine("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', '1', ' ', 'J', 'o', 'u', 'e', 'r', ' ', '|');
+                Console.WriteLine("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', '2', ' ', 'S', 'c', 'o', 'r', 'e', ' ', '|');
+                Console.WriteLine("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', '3', ' ', 'F', 'i', 'n', ' ', ' ', ' ', '|');
+                Console.WriteLine("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '*', '-', '-', '-', '-', '-', '-', '-', '-', '-', '*');
+                Console.WriteLine();
+               
+                do
+                {
+                    SetConsoleTextAttribute(hConsole, 014);
+                    Console.Write("Votre choix : ");
+                    reponse = Console.ReadLine();
+                }
+                while (reponse != "1" && reponse != "2" && reponse != "3");
+                Console.Clear();
+                SetConsoleTextAttribute(hConsole, 015);
+```
+
+#### Jouer
+
+Cette partie permet à l'éxécution dans l'ordre des fonctions comme ```tirageDuJeu()``` par exemple, et de guider l'utilsateur dans son utilisation.
+
+```c#
+if (reponse == "1")
+  {
+      int i = 0;
+      tirageDuJeu(ref MonJeu);
+      affichageCarte(ref MonJeu[i]);
+
+      try
+      {
+          int compteur = 0;
+          SetConsoleTextAttribute(hConsole, 012);
+          Console.Write("Nombre de cartes a echanger <0-5> ? : ");
+          compteur = int.Parse(Console.ReadLine());
+          int[] e = new int[compteur];
+          for (int j = 0; j < e.Length; j++)
+            {
+                Console.Write("Carte <1-5> : ");
+
+                e[j] = int.Parse(Console.ReadLine());
+                e[j] -= 1;
+            }
+            echangeCarte(ref MonJeu, ref e);
+        }
+```
+
+#### Affichage résultat
+
+Cette partie concerne l'affichage du résultat que l'utilisateur aura lors de sa partie. Elle s'appuie sur notre fonction ```cherche_combinaison()```.
+
+```c#
+Console.Write("RESULTAT - Vous avez : ");
+   try
+   { 
+      switch (cherche_combinaison(ref MonJeu))
+      {
+         case combinaison.RIEN:
+           Console.WriteLine("rien du tout... desole!"); break;
+         case combinaison.PAIRE:
+            Console.WriteLine("une simple paire..."); break;
+         case combinaison.DOUBLE_PAIRE:
+             Console.WriteLine("une double paire; on peut esperer..."); break;
+         case combinaison.BRELAN:
+             Console.WriteLine("un brelan; pas mal..."); break;
+         case combinaison.QUINTE:
+             Console.WriteLine("une quinte; bien!"); break;
+         case combinaison.FULL:
+              Console.WriteLine("un full; ouahh!"); break;
+         case combinaison.COULEUR:
+              Console.WriteLine("une couleur; bravo!"); break;
+         case combinaison.CARRE:
+              Console.WriteLine("un carre; champion!"); break;
+         case combinaison.QUINTE_FLUSH:
+               Console.WriteLine("une quinte-flush; royal!"); break;
+      };
+    }
+```
+
