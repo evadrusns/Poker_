@@ -400,3 +400,5 @@ Console.Write("RESULTAT - Vous avez : ");
     }
 ```
 
+#### Enregistrer le score
+
